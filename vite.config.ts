@@ -6,10 +6,11 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ mode }) => {
   console.log("*** MODE", mode);
   const env = loadEnv(mode, process.cwd(), "");
+  console.log("*** ENV", env, process.env);
 
   let API_KEY = env.API_KEY;
 
-  if (mode !== "development") {
+  if (mode === "production") {
     API_KEY = env.VITE_API_KEY;
   }
 
