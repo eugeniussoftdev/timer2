@@ -17,7 +17,9 @@ const Timer = () => {
   };
 
   const pauseTimer = () => {
-    clearInterval(ref.current);
+    if (ref.current) {
+      clearInterval(ref.current);
+    }
   };
 
   const stopTimer = () => {
