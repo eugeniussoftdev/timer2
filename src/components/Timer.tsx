@@ -4,7 +4,7 @@ import { formatTime } from "../helpers/formatTime";
 
 const Timer = () => {
   const [time, setTimer] = useState(0);
-  const ref = useRef<number | undefined>(undefined);
+  const ref = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const startTimer = () => {
     console.log(ref.current);
