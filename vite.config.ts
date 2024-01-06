@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     define: {
       "process.env.API_KEY": JSON.stringify(API_KEY),
       "process.env.AUTH_DOMAIN": JSON.stringify(env.AUTH_DOMAIN),
-      "process.env.PROJECT_ID": JSON.stringify(env.PROJECT_Id),
+      "process.env.PROJECT_ID": JSON.stringify(env.PROJECT_ID),
       "process.env.STORAGE_BUCKET": JSON.stringify(env.STORAGE_BUCKET),
       "process.env.MESSAGINE_SENDER_ID": JSON.stringify(
         env.MESSAGINE_SENDER_ID
