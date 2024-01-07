@@ -8,9 +8,12 @@ import {
   User,
 } from "firebase/auth";
 
+import DataList from "./components/DataList";
 import Timer from "./components/Timer";
 import reactLogo from "./assets/react.svg";
 import { auth } from "./config/firebase";
+
+import { useCreateCollection } from "./hooks/firestore";
 
 import "./App.css";
 
@@ -18,7 +21,8 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [user, setUser] = useState<User | null>(null);
-  console.log(auth);
+
+  const { createCollection } = useCreateCollection();
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -41,10 +45,10 @@ function App() {
         userEmail,
         userPassword
       );
-      console.log(
-        "🚀 *** file: App.tsx:27 *** registerHandler *** user:",
-        user
-      );
+
+      if (user?.user?.uid) {
+        createCollection(user?.user?.uid);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +85,7 @@ function App() {
         <button onClick={loginHandler}>Login</button>
         <div>
           {user?.email}
+          <p>{user?.uid}</p>
           <button onClick={signOutHandler}>Sign Out</button>
         </div>
       </div>
@@ -94,6 +99,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
 
+      <div className="card">
+        <DataList />
+      </div>
       <div className="card">
         <Timer />
       </div>
