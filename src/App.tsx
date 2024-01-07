@@ -8,8 +8,8 @@ import {
   User,
 } from "firebase/auth";
 
-import DataList from "./components/DataList";
-import Timer from "./components/Timer";
+import { DataList } from "./components/DataList";
+import { Timer } from "./components/Timer";
 import reactLogo from "./assets/react.svg";
 import { auth } from "./config/firebase";
 

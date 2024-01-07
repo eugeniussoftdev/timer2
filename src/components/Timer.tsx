@@ -15,7 +15,7 @@ const defaultWorkItem = {
 
 export type WorkItemType = typeof defaultWorkItem;
 
-const Timer = () => {
+export const Timer = () => {
   const [time, setTimer] = useState(0);
   const [workName, setWorkName] = useState("");
   const [workItem, setWorkItem] = useState<WorkItemType>(defaultWorkItem);

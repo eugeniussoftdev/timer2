@@ -4,8 +4,7 @@ import { auth } from "../config/firebase";
 
 import { useGetUserData } from "../hooks/firestore";
 
-const DataList = () => {
-  //   const { data } = useGetData();
+export const DataList = () => {
   const { data } = useGetUserData(auth.currentUser?.uid);
   const [tableKeys, setTableKeys] = useState<string[]>([]);
 
@@ -24,7 +23,7 @@ const DataList = () => {
         <thead>
           <tr>
             {tableKeys?.map((key) => {
-              return <th>{key}</th>;
+              return <th key={key}>{key}</th>;
             })}
           </tr>
         </thead>
@@ -44,5 +43,3 @@ const DataList = () => {
     </div>
   );
 };
-
-export default DataList;
