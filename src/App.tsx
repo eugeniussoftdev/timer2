@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 
 import { DataList } from "./components/DataList";
+import LoginForm from "./components/LoginForm";
 import { Timer } from "./components/Timer";
 import reactLogo from "./assets/react.svg";
 import { auth } from "./config/firebase";
@@ -68,7 +69,8 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="flex flex-col items-center justify-center">
+        <LoginForm />
         <div>
           <input
             placeholder="user email"

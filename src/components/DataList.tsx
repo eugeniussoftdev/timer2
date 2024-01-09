@@ -18,8 +18,8 @@ export const DataList = () => {
   }, [data?.length, tableKeys]);
 
   return (
-    <div>
-      <table>
+    <div className="table-responsive">
+      <table className="table table-striped">
         <thead>
           <tr>
             {tableKeys?.map((key) => {
