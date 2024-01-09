@@ -61,6 +61,7 @@ export const Timer = () => {
       <div>{formatTime(time * 1000)}</div>
       <div>
         <input
+          className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
           placeholder="work name"
           onChange={setWorkNameHandler}
           value={workName}
