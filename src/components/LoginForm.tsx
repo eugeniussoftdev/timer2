@@ -1,12 +1,11 @@
-import React, { ChangeEvent, useState } from "react";
-import { User, signInWithEmailAndPassword } from "firebase/auth";
+import { ChangeEvent, useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { auth } from "../config/firebase";
 
 export const LoginForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [user, setUser] = useState<User | null>(null);
 
   const loginHandler = async () => {
     try {
