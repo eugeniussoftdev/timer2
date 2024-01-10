@@ -1,4 +1,3 @@
-
 export const formatTime = (timeInMilliseconds: number) => {
   const hours = Math.floor(timeInMilliseconds / 3600000);
   const minutes = Math.floor((timeInMilliseconds % 3600000) / 60000);
@@ -11,5 +10,11 @@ export const formatTime = (timeInMilliseconds: number) => {
   const formattedSeconds = String(seconds).padStart(2, "0");
   const formattedMilliseconds = String(milliseconds).padStart(2, "0");
 
-  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`;
+  return {
+    stringTime: `${formattedHours}:${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`,
+    formattedHours,
+    formattedMinutes,
+    formattedSeconds,
+    formattedMilliseconds,
+  };
 };

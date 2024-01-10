@@ -57,8 +57,9 @@ export const Timer = () => {
   };
 
   return (
-    <div>
-      <div>{formatTime(time * 1000)}</div>
+    <div className="flex flex-col justify-center align-center contenct-center ">
+      <div>{formatTime(time * 1000).stringTime}</div>
+      <TimerComponent timeObject={formatTime(time * 1000)} />
       <div>
         <input
           className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
@@ -75,4 +76,110 @@ export const Timer = () => {
   );
 };
 
-export default Timer;
+export const TimerComponent = ({ timeObject }) => {
+  const countDownTime = {
+    hours: timeObject.formattedHours,
+    minutes: timeObject.formattedMinutes,
+    seconds: timeObject.formattedSeconds,
+    // timeObject.formattedMilliseconds,
+  };
+
+  return (
+    <div className="flex">
+      {/* <div className="flex gap-3 sm:gap-1   flex-row bg-[#2A303C] h-36 rounded-lg overflow-hidden pt-2 pr-3 sm:pt-0 sm:pr-0"> */}
+      <div className="flex flex-col bg-[#2A303C] sm:w-32 w-16">
+        <div className="h-16 sm:h-20 bg-[#2A303C]">
+          <div className="h-[60px] flex justify-center bg-[#2A303C] sm:text-3xl text-xl !text-[#A6ADBB]">
+            <div
+              className={
+                countDownTime?.days >= 0 &&
+                countDownTime?.hours == 23 &&
+                countDownTime?.minutes == 59 &&
+                countDownTime?.seconds == 59
+                  ? "animate-timer"
+                  : "relative top-5"
+              }
+            >
+              {countDownTime?.days}
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <span className="text-lg sm:text-2xl text-center text-[#A6ADBB]">
+            {countDownTime?.Days == 1 ? "Day" : "Days"}
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col bg-[#2A303C] sm:w-32 w-16">
+        <div className="h-16 sm:h-20 bg-[#2A303C]">
+          <div className="h-[60px] flex justify-center bg-[#2A303C] sm:text-3xl text-xl !text-[#A6ADBB]">
+            <div
+              className={
+                countDownTime?.hours >= 0 &&
+                countDownTime?.minutes == 59 &&
+                countDownTime?.seconds == 59
+                  ? "animate-timer"
+                  : "relative top-5"
+              }
+            >
+              {countDownTime?.hours}
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <span className="text-lg sm:text-2xl text-center text-[#A6ADBB]">
+            {countDownTime?.hours == 1 ? "Hour" : "Hours"}
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col bg-[#2A303C] sm:w-32 w-16">
+        <div className="h-16 sm:h-20 bg-[#2A303C]">
+          <div className="h-[60px] flex justify-center bg-[#2A303C] sm:text-3xl text-xl !text-[#A6ADBB]">
+            <div
+              className={
+                countDownTime?.minutes >= 0 && countDownTime?.seconds == 59
+                  ? "animate-timer"
+                  : "relative top-5"
+              }
+            >
+              {countDownTime?.minutes}
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <span className="text-lg sm:text-2xl text-center text-[#A6ADBB]">
+            {countDownTime?.minutes == 1 ? "Minute" : "Minutes"}
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col bg-[#2A303C] sm:w-32 w-16">
+        <div className="h-16 sm:h-20 bg-[#2A303C]">
+          <div className="h-[60px] flex justify-center  bg-[#2A303C] overflow-hidden sm:text-3xl text-xl text-[#A6ADBB]">
+            <div>{countDownTime?.seconds}</div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <span className="text-lg sm:text-2xl text-center text-[#A6ADBB]">
+            {countDownTime?.seconds == 1 ? "Second" : "Seconds"}
+          </span>
+        </div>
+      </div>
+      {/* </div> */}
+    </div>
+  );
+};
+/*
+    Extenal css to add 
+.animate-timer {
+         position: relative;
+          animation: animatetop 1s infinite;
+        }
+        @keyframes animatetop {
+          from {
+            top: -50px;
+          }
+          to {
+            top: 20px;
+          }
+        }
+ */
