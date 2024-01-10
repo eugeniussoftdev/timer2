@@ -1,5 +1,4 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import viteLogo from "/vite.svg";
 import {
   createUserWithEmailAndPassword,
   signOut,
@@ -8,17 +7,21 @@ import {
   User,
 } from "firebase/auth";
 
+import { Contact } from "./components/Contact";
 import { DataList } from "./components/DataList";
+import { Header } from "./components/Header";
 import LoginForm from "./components/LoginForm";
+import { Subscription } from "./components/Subscription";
 import { Timer } from "./components/Timer";
-import reactLogo from "./assets/react.svg";
 import { auth } from "./config/firebase";
 
 import { useCreateCollection } from "./hooks/firestore";
+import { useLocation } from "./hooks/useLocation";
 
 import "./App.css";
 
 function App() {
+  const { page } = useLocation();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [user, setUser] = useState<User | null>(null);
@@ -69,44 +72,49 @@ function App() {
 
   return (
     <>
+      <Header />
       <div className="flex flex-col items-center justify-center">
-        <LoginForm />
-        <div>
-          <input
-            placeholder="user email"
-            onChange={setUserEmailHandler}
-            value={userEmail}
-          />
-          <input
-            placeholder="password"
-            onChange={setUserPasswordHandler}
-            value={userPassword}
-          />
-        </div>
-        <button onClick={registerHandler}>Register</button>
-        <button onClick={loginHandler}>Login</button>
-        <div>
-          {user?.email}
-          <p>{user?.uid}</p>
-          <button onClick={signOutHandler}>Sign Out</button>
-        </div>
+        {page === "/" ||
+          (page === "/login" && (
+            <>
+              <LoginForm />
+              <div>
+                <input
+                  placeholder="user email"
+                  onChange={setUserEmailHandler}
+                  value={userEmail}
+                />
+                <input
+                  placeholder="password"
+                  onChange={setUserPasswordHandler}
+                  value={userPassword}
+                />
+              </div>
+              <button onClick={registerHandler}>Register</button>
+              <button onClick={loginHandler}>Login</button>
+              <div>
+                {user?.email}
+                <p>{user?.uid}</p>
+                <button onClick={signOutHandler}>Sign Out</button>
+              </div>
+            </>
+          ))}
+        {page === "/pricing" && <Subscription />}
       </div>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
 
-      <div className="card">
-        <DataList />
-      </div>
-      <div className="card">
-        <Timer />
-      </div>
+      {page === "/timer" && (
+        <>
+          <div className="card">
+            <DataList />
+          </div>
+
+          <div className="card">
+            <Timer />
+          </div>
+        </>
+      )}
+
+      {page === "/contact" && <Contact />}
     </>
   );
 }
